@@ -4,7 +4,7 @@
       <el-steps :active="active" finish-status="success">
         <el-step title="步骤 1" description="构建reader">1</el-step>
         <el-step title="步骤 2" description="构建writer">2</el-step>
-        <el-step title="步骤 3" description="字段映射">3</el-step>
+        <el-step title="字段映射" description="选择字段并建立映射关系">3</el-step>
         <el-step title="步骤 4" description="构建">4</el-step>
       </el-steps>
 
@@ -162,6 +162,17 @@ export default {
         // 将第一步和第二步得到的字段名字发送到第三步
         if (this.active === 2) {
           this.$refs.mapper.sendColumns(fromColumnList, toColumnsList)
+        }
+        if (this.active === 3) {
+          const lColumns = this.$refs.mapper.getLColumns()
+          const rColumns = this.$refs.mapper.getRColumns()
+          if (lColumns.length === 0 || rColumns.length === 0) {
+            this.$message({
+              message: '请映射源表和目标表的字段',
+              type: 'warning'
+            })
+            return
+          }
         }
         if (this.active === 4) {
           this.temp.jobJson = this.configJson
