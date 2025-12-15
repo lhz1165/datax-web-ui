@@ -186,17 +186,43 @@ export const asyncRoutes = [
     ]
   },
   {
-    path: '/datax/datasource',
+    path: '/datax/db',
     component: Layout,
-    redirect: '/datax/jdbc-datasource',
-    name: 'datasource',
-    meta: { title: '数据源管理', icon: 'cfg-datasouce' },
+    redirect: '/datax/db/datasource',
+    name: 'dbManage',
+    meta: { title: '数据库管理', icon: 'db' },
     children: [
       {
-        path: 'jdbcDatasource',
+        path: 'datasource',
         name: 'JdbcDatasource',
         component: () => import('@/views/datax/jdbc-datasource/index'),
-        meta: { title: '数据源管理', icon: 'cfg-datasouce' }
+        meta: { title: '数据源管理', icon: 'db_source' }
+      },
+      {
+        path: 'database',
+        name: 'Database',
+        component: () => import('@/views/datax/database/index'),
+        meta: { title: '数据库管理', icon: 'cfg-datasouce' }
+      },
+      {
+        path: 'database/create-table',
+        name: 'CreateTable',
+        hidden: true,
+        component: () => import('@/views/datax/database/create-table'),
+        meta: { title: '创建表', icon: 'db', activeMenu: '/datax/db/database' }
+      },
+      {
+        path: 'database/alter-table',
+        name: 'AlterTable',
+        hidden: true,
+        component: () => import('@/views/datax/database/alter-table'),
+        meta: { title: '修改表', icon: 'db', activeMenu: '/datax/db/database' }
+      },
+      {
+        path: 'query',
+        name: 'DbQuery',
+        component: () => import('@/views/datax/db-query/index'),
+        meta: { title: '数据库查询', icon: 'db_find', noCache: true }
       }
     ]
   },
@@ -260,6 +286,7 @@ export const asyncRoutes = [
       }
     ]
   },
+  // 数据库管理路由已上移到数据源管理之后
   toolRouter,
   { path: '*', redirect: '/404', hidden: true }
 ]

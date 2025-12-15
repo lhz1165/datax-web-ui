@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'Datax Web',
+  title: '数据集成',
 
   /**
    * @type {boolean} true | false
